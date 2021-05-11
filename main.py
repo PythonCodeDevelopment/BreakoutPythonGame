@@ -13,6 +13,11 @@ square = pygame.rect.Rect(0, 0, 50, 50)
 running = True
 
 while running:
+    
+    square.x += 5
+    square.y += 5
+    
+    
     pygame.draw.rect(screen, RED, square)
     pygame.display.flip()
 
