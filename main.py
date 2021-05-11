@@ -1,6 +1,7 @@
 import pygame
 
 
+
 pygame.init()
 
 RED = (255, 0, 0)
