@@ -6,6 +6,8 @@ pygame.init()
 
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)
+FPS = 60  #Frames per second
+
 
 #variablize these values if need different size output window
 screen = pygame.display.set_mode((600, 800))
@@ -30,7 +32,7 @@ running = True
 while running:
 #animate the square
     
-    clock.tick(1)
+    clock.tick(FPS)
   #1 frame per second
     
     square.x += x_speed
