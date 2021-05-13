@@ -18,13 +18,43 @@ screen_rect = screen.get_rect()
 #new clock
 clock = pygame.time.Clock()
 
+class Ball(pygame.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+        self.image = pygame.Surface((50, 50))
+        self.image.fill(RED)
+        self.rect = self.image.get_rect()
+        self.rect.center = screen_rect.center
+        self.x_speed = 5
+        self.y_speed = 5
 
-square = pygame.rect.Rect(0, 0, 50, 50)
+    def update(self):
+        # Update code goes her
 
-square.center = screen_rect.center
+        #bouncing off the side walls
+    
+        if square.right >= screen_rect.right:
+            self.x_speed = -5
+        if square.left <= screen_rect.left:
+            self.x_speed = 5
+        if square.top <= screen_rect.top:
+            self.y_speed = 5
+        if square.bottom >= screen_rect.bottom:
+            self.y_speed = -5
+    
+        square.x += self.x_speed
+        square.y += self.y_speed
 
-x_speed = 5
-y_speed = 5
+#create sprite group
+all_sprites = pygame.sprite.Group()
+
+#instantiate ball class
+ball = Ball()
+
+#add ball instance into group to manage things easily
+all_sprites.add(ball)
+
+
 
 
 running = True
@@ -35,37 +65,20 @@ while running:
     clock.tick(FPS)
   #1 frame per second
     
+    
+    
 #     Fix the window close-button
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
             
             
-    #bouncing off the side walls
-    
-    if square.right >= screen_rect.right:
-        x_speed = -5
-    if square.left <= screen_rect.left:
-        x_speed = 5
-    if square.top <= screen_rect.top:
-        y_speed = 5
-    if square.bottom >= screen_rect.bottom:
-        y_speed = -5
+
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    square.x += x_speed
-    square.y += y_speed
     #add background color
     screen.fill(BLACK)
-    pygame.draw.rect(screen, RED, square)
+    
     pygame.display.flip()
 
 pygame.quit()
