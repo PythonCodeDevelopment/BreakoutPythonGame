@@ -35,6 +35,26 @@ while running:
     clock.tick(FPS)
   #1 frame per second
     
+    #bouncing off the side walls
+    
+    if square.right >= screen_rect.right:
+        x_speed = -5
+    if square.left <= screen_rect.left:
+        x_speed = 5
+    if square.top <= screen_rect.top:
+        y_speed = 5
+    if square.bottom >= screen_rect.bottom:
+        y_speed = -5
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     square.x += x_speed
     square.y += y_speed
     #add background color
