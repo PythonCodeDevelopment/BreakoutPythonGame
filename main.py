@@ -35,6 +35,12 @@ while running:
     clock.tick(FPS)
   #1 frame per second
     
+#     Fix the window close-button
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+            
+            
     #bouncing off the side walls
     
     if square.right >= screen_rect.right:
