@@ -27,8 +27,20 @@ class Brick(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
         brick_image = pygame.image.load("brick.png").convert_alpha()
-        self.image = brick_image
+        
+        # calculate new size based on BRICKS_PER_ROW
+        brick_width = round(screen_rect.width / BRICKS_PER_ROW)
+        orig_size = brick_image.get_rect()
+        scale_factor = (brick_width / orig_size.width)
+        brick_height = round(orig_size.height * scale_factor)
+        new_size = (brick_width, brick_height)
+        
+        
+        # scale the image
+        self.image = pygame.transform.scale(brick_image, new_size)
         self.rect = self.image.get_rect()
+
+        
 
 
 
