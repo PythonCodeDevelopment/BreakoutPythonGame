@@ -11,7 +11,7 @@ BLUE = (0, 0, 255)
 GREEN = (0, 255, 0)
 BRICKS_PER_ROW = 10
 NUM_ROWS = 5
-
+BLANK_ROWS = 2
 
 
 #variablize these values if need different size output window
@@ -41,6 +41,9 @@ class Brick(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         
         # position the brick
+        
+        
+        row += BLANK_ROWS  #skill mechanics:add extra blank rows above bricks,this will help to hit more bricks
         self.rect.x = col * brick_width
         self.rect.y = row * brick_height
 
@@ -151,6 +154,14 @@ while running:
     # Check for paddle / ball collision
     if pygame.sprite.collide_rect(ball, paddle):
         ball.y_speed = -5
+        
+    #skill mechanics:If the ball hits the left side of the paddle, make the ball go left (negative x speed).
+    #Otherwise, make the ball go right (positive x speed).
+        
+        if ball.rect.centerx < paddle.rect.centerx:
+            ball.x_speed = -5
+        else:
+            ball.x_speed = 5   
         
     # Reset ball if lost
     if ball.lost:
