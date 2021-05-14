@@ -108,6 +108,7 @@ class Paddle(pygame.sprite.Sprite):
             
 #create sprite group
 all_sprites = pygame.sprite.Group()
+bricks = pygame.sprite.Group()
 
 #instantiate ball class
 ball = Ball()
@@ -121,11 +122,12 @@ all_sprites.add(paddle)
 
 
 
+
 for row in range(0, NUM_ROWS):
     for col in range(0, BRICKS_PER_ROW):
         brick = Brick(row, col)
         all_sprites.add(brick)
-        
+        bricks.add(brick)
         
 running = True
 
@@ -153,6 +155,14 @@ while running:
     # Reset ball if lost
     if ball.lost:
         ball.reset()
+    
+    # Check for ball / brick collision
+    collided_brick = pygame.sprite.spritecollideany(ball, bricks)
+    if collided_brick:
+        collided_brick.kill()
+        ball.y_speed *= -1
+    
+    
     
     #add background color
     screen.fill(BLACK)
