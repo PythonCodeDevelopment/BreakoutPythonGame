@@ -12,7 +12,7 @@ GREEN = (0, 255, 0)
 BRICKS_PER_ROW = 10
 NUM_ROWS = 5
 BLANK_ROWS = 2
-
+WHITE = (255, 255, 255)
 
 #variablize these values if need different size output window
 screen = pygame.display.set_mode((600, 800))
@@ -131,7 +131,20 @@ for row in range(0, NUM_ROWS):
         brick = Brick(row, col)
         all_sprites.add(brick)
         bricks.add(brick)
-        
+
+score = 0
+lives = 3
+
+def draw_text(surface, text, pos=(0, 0), color=WHITE, font_size=20, anchor="topleft"):
+    arial = pygame.font.match_font("arial")
+    font = pygame.font.Font(arial, font_size)
+    text_surface = font.render(text, True, color)
+    text_rect = text_surface.get_rect()
+    setattr(text_rect, anchor, pos)
+    surface.blit(text_surface, text_rect)
+    
+    
+    
 running = True
 
 while running:
@@ -165,11 +178,13 @@ while running:
         
     # Reset ball if lost
     if ball.lost:
+        lives -= 1
         ball.reset()
     
     # Check for ball / brick collision
     collided_brick = pygame.sprite.spritecollideany(ball, bricks)
     if collided_brick:
+        score += 1
         collided_brick.kill()
         ball.y_speed *= -1
     
@@ -179,6 +194,9 @@ while running:
     screen.fill(BLACK)
     
     all_sprites.draw(screen)
+    
+    score_text = f"Score: {score} / Lives: {lives}"
+    draw_text(screen, score_text, (8, 8))
     
     pygame.display.flip()
 
