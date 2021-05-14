@@ -27,6 +27,7 @@ class Ball(pygame.sprite.Sprite):
         self.rect.center = screen_rect.center
         self.x_speed = 5
         self.y_speed = 5
+        self.lost = False
 
     def update(self):
         # Update code goes her
@@ -40,7 +41,7 @@ class Ball(pygame.sprite.Sprite):
         if self.rect.top <= screen_rect.top:
             self.y_speed = 5
         if self.rect.bottom >= screen_rect.bottom:
-            self.y_speed = -5
+            self.lost = True
     
         self.rect.x += self.x_speed
         self.rect.y += self.y_speed
