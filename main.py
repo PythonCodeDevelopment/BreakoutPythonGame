@@ -7,7 +7,7 @@ pygame.init()
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 FPS = 60  #Frames per second
-
+BLUE = (0, 0, 255)
 
 #variablize these values if need different size output window
 screen = pygame.display.set_mode((600, 800))
@@ -21,7 +21,7 @@ clock = pygame.time.Clock()
 class Ball(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.image = pygame.Surface((50, 50))
+        self.image = pygame.Surface((20, 20))
         self.image.fill(RED)
         self.rect = self.image.get_rect()
         self.rect.center = screen_rect.center
@@ -45,16 +45,28 @@ class Ball(pygame.sprite.Sprite):
         self.rect.x += self.x_speed
         self.rect.y += self.y_speed
 
+
+class Paddle(pygame.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+        self.image = pygame.Surface((100, 50))
+        self.image.fill(BLUE)
+        self.rect = self.image.get_rect()
+        self.rect.center = screen_rect.center
+        #to keep paddle little up from bottom
+        self.rect.bottom = screen_rect.bottom - 10
 #create sprite group
 all_sprites = pygame.sprite.Group()
 
 #instantiate ball class
 ball = Ball()
 
+paddle = Paddle()
+
 #add ball instance into group to manage things easily
 all_sprites.add(ball)
 
-
+all_sprites.add(paddle)
 
 
 running = True
