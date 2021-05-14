@@ -55,6 +55,23 @@ class Paddle(pygame.sprite.Sprite):
         self.rect.center = screen_rect.center
         #to keep paddle little up from bottom
         self.rect.bottom = screen_rect.bottom - 10
+     
+    #keyboard controls for paddle
+    def update(self):
+        #move paddle right or left direction
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_RIGHT]:
+            self.rect.x += 10
+        if keys[pygame.K_LEFT]:
+            self.rect.x -= 10
+        
+        #keep paddle from going off the screen
+        if self.rect.right >= screen_rect.right:
+            self.rect.right = screen_rect.right
+        if self.rect.left <= screen_rect.left:
+            self.rect.left = screen_rect.left
+            
+            
 #create sprite group
 all_sprites = pygame.sprite.Group()
 
