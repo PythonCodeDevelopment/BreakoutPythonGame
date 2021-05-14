@@ -1,5 +1,5 @@
 import pygame
-
+import random
 
 
 pygame.init()
@@ -28,7 +28,7 @@ class Ball(pygame.sprite.Sprite):
         
     def reset(self):
         self.rect.center = screen_rect.center
-        self.x_speed = 5
+        self.x_speed = random.choice((5, -5))
         self.y_speed = 5
         self.lost = False
         
