@@ -72,12 +72,12 @@ while running:
         if event.type == pygame.QUIT:
             running = False
             
-            
-
-    
-    
+           
+    all_sprites.update()
     #add background color
     screen.fill(BLACK)
+    
+    all_sprites.draw(screen)
     
     pygame.display.flip()
 
