@@ -8,6 +8,11 @@ BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 FPS = 60  #Frames per second
 BLUE = (0, 0, 255)
+GREEN = (0, 255, 0)
+BRICKS_PER_ROW = 10
+NUM_ROWS = 5
+
+
 
 #variablize these values if need different size output window
 screen = pygame.display.set_mode((600, 800))
@@ -17,6 +22,15 @@ screen_rect = screen.get_rect()
 #control game speed
 #new clock
 clock = pygame.time.Clock()
+
+class Brick(pygame.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+        brick_image = pygame.image.load("brick.png").convert_alpha()
+        self.image = brick_image
+        self.rect = self.image.get_rect()
+
+
 
 class Ball(pygame.sprite.Sprite):
     def __init__(self):
@@ -54,7 +68,7 @@ class Paddle(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
         self.image = pygame.Surface((100, 50))
-        self.image.fill(BLUE)
+        self.image.fill(GREEN)
         self.rect = self.image.get_rect()
         self.rect.center = screen_rect.center
         #to keep paddle little up from bottom
@@ -89,6 +103,9 @@ all_sprites.add(ball)
 
 all_sprites.add(paddle)
 
+brick = Brick()
+
+all_sprites.add(brick)
 
 running = True
 
