@@ -24,11 +24,14 @@ class Ball(pygame.sprite.Sprite):
         self.image = pygame.Surface((20, 20))
         self.image.fill(RED)
         self.rect = self.image.get_rect()
+        self.reset()
+        
+    def reset(self):
         self.rect.center = screen_rect.center
         self.x_speed = 5
         self.y_speed = 5
         self.lost = False
-
+        
     def update(self):
         # Update code goes her
 
@@ -109,6 +112,10 @@ while running:
     # Check for paddle / ball collision
     if pygame.sprite.collide_rect(ball, paddle):
         ball.y_speed = -5
+        
+    # Reset ball if lost
+    if ball.lost:
+        ball.reset()
     
     #add background color
     screen.fill(BLACK)
