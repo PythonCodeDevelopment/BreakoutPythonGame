@@ -104,6 +104,12 @@ while running:
             
            
     all_sprites.update()
+    
+    
+    # Check for paddle / ball collision
+    if pygame.sprite.collide_rect(ball, paddle):
+        ball.y_speed = -5
+    
     #add background color
     screen.fill(BLACK)
     
