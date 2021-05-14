@@ -24,7 +24,7 @@ screen_rect = screen.get_rect()
 clock = pygame.time.Clock()
 
 class Brick(pygame.sprite.Sprite):
-    def __init__(self):
+    def __init__(self, row, col):
         super().__init__()
         brick_image = pygame.image.load("brick.png").convert_alpha()
         
@@ -39,6 +39,10 @@ class Brick(pygame.sprite.Sprite):
         # scale the image
         self.image = pygame.transform.scale(brick_image, new_size)
         self.rect = self.image.get_rect()
+        
+        # position the brick
+        self.rect.x = col * brick_width
+        self.rect.y = row * brick_height
 
         
 
@@ -115,10 +119,14 @@ all_sprites.add(ball)
 
 all_sprites.add(paddle)
 
-brick = Brick()
 
-all_sprites.add(brick)
 
+for row in range(0, NUM_ROWS):
+    for col in range(0, BRICKS_PER_ROW):
+        brick = Brick(row, col)
+        all_sprites.add(brick)
+        
+        
 running = True
 
 while running:
